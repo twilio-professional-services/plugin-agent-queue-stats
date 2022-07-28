@@ -1,0 +1,20 @@
+{
+  "name": "plugin-agent-queue-stats",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "flex-plugin pre-script-check"
+  },
+  "dependencies": {
+    "@twilio/flex-plugin-scripts": "5.1.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-emotion": "9.2.12"
+  },
+  "devDependencies": {
+    "@twilio/flex-ui": "^1",
+    "@types/react-redux": "^7.1.1",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^4"
+  }
+}
