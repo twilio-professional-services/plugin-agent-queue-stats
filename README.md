@@ -8,7 +8,7 @@ While this example is displaying only a few statistics in the data table, additi
 
 ## How it works
 
-Twilio Flex maintains several Twilio Sync maps that contain queue stats data. This plugin uses a live query on the `tr-queue` index to maintain a listing of all known queues, then subscribes to the corresponding `realtime_statistics.v1` map for each queue. This data is then maintained and updated in real-time within the `agentQueueStatus` Redux namespace.
+Twilio Flex maintains several Twilio Sync maps that contain queue stats data. This plugin uses a live query on the `tr-queue` index to maintain a listing of all known queues, then subscribes to the corresponding `realtime_statistics.v1` map for each queue. This data is then maintained and updated in real-time within the `agentQueueStats` Redux namespace.
 
 ## Pre-requisites
 
