@@ -5,6 +5,7 @@ import { FlexPlugin } from '@twilio/flex-plugin';
 import reducers, { namespace } from './states';
 import { StatsHelper } from './utils/StatsHelper';
 import AgentQueueStats from './components/AgentQueueStats/AgentQueueStatsContainer';
+import AgentQueueStatsSideLink from './components/AgentQueueStatsSideLink/AgentQueueStatsSideLink';
 
 const PLUGIN_NAME = 'AgentQueueStatsPlugin';
 
@@ -32,16 +33,7 @@ export default class AgentQueueStatsPlugin extends FlexPlugin {
     )
     
     flex.SideNav.Content.add(
-      <Flex.SideLink
-      key="agent-queue-stats"
-      icon="Queues"
-      iconActive="QueuesBold"
-      showLabel={true}
-      onClick={() => {
-        flex.Actions.invokeAction("NavigateToView", {
-          viewName: "agent-queue-stats"
-        })
-      }}>Agent Queue Stats</Flex.SideLink>, {sortOrder:1}
+      <AgentQueueStatsSideLink key='agent-queue-stats-side-link' />, {sortOrder:1}
     )
     
     let statsHelper = new StatsHelper(manager);
