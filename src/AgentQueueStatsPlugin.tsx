@@ -40,6 +40,7 @@ export default class AgentQueueStatsPlugin extends FlexPlugin {
   }
   
   showAgentViews(manager: Flex.Manager) {
+    return true;
     const { roles } = manager.user;
     return roles.indexOf("agent") >= 0;
   }

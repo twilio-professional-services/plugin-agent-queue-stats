@@ -1,11 +1,7 @@
 import { ContainerProps } from './AgentQueueStatsContainer';
 import React, { useEffect, useState } from 'react';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import { StatsTableCell, StatsKeyTableCell } from './AgentQueueStatsStyles';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import { ColumnDefinition, DataTable } from '@twilio/flex-ui';
+import { QueueStats } from '../../utils/StatsHelper';
 
 const AgentQueueStatsComponent = (props: ContainerProps) => {
   const [clock, setClock] = useState(false);
@@ -50,38 +46,66 @@ const AgentQueueStatsComponent = (props: ContainerProps) => {
   
   return (
     <div>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>Queues</TableCell>
-            <TableCell>Active Now</TableCell>
-            <TableCell>Waiting Now</TableCell>
-            <TableCell>Longest Now</TableCell>
-            <TableCell>SLA Today</TableCell>
-            <TableCell>Handled Today</TableCell>
-            <TableCell>Abandoned Today</TableCell>
-            <TableCell>Agents Available</TableCell>
-            <TableCell>Total Agents</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {
-            props.agentQueueStats.map(queue => (
-              <TableRow key={queue.queue.queue_sid}>
-                <StatsKeyTableCell>{queue.queue.queue_name}</StatsKeyTableCell>
-                <StatsTableCell>{queue.tasks_now?.active_tasks}</StatsTableCell>
-                <StatsTableCell>{queue.tasks_now?.waiting_tasks}</StatsTableCell>
-                <StatsTableCell>{typeof queue.tasks_now?.longest_task_waiting_from === 'string' ? getDuration(queue.tasks_now?.longest_task_waiting_from) : 'N/A'}</StatsTableCell>
-                <StatsTableCell>{typeof queue.tasks_today?.sla_percentage === 'number' && queue.tasks_today?.sla_percentage >= 0 ? `${Math.round(queue.tasks_today?.sla_percentage * 100)}%` : 'N/A'}</StatsTableCell>
-                <StatsTableCell>{queue.tasks_today?.handled_tasks_count}</StatsTableCell>
-                <StatsTableCell>{queue.tasks_today?.abandoned_tasks_count}</StatsTableCell>
-                <StatsTableCell>{queue.workers?.total_available_workers}</StatsTableCell>
-                <StatsTableCell>{queue.workers?.total_eligible_workers}</StatsTableCell>
-              </TableRow>
-            ))
-          }
-        </TableBody>
-      </Table>
+      <DataTable
+        items={props.agentQueueStats}
+        defaultSortColumn="name-column">
+        <ColumnDefinition
+          key="name-column"
+          header="Queues"
+          sortDirection='asc'
+          sortingFn={(a: QueueStats, b: QueueStats) => (a.queue.queue_name > b.queue.queue_name) ? 1 : -1}
+          content={(queue: QueueStats) => {
+            return <span>{queue.queue.queue_name}</span>
+          }} />
+        <ColumnDefinition
+          key="active-now-column"
+          header="Active Now"
+          content={(queue: QueueStats) => {
+            return <span>{queue.tasks_now?.active_tasks}</span>
+          }} />
+        <ColumnDefinition
+          key="waiting-now-column"
+          header="Waiting Now"
+          content={(queue: QueueStats) => {
+            return <span>{queue.tasks_now?.waiting_tasks}</span>
+          }} />
+        <ColumnDefinition
+          key="longest-now-column"
+          header="Longest Now"
+          content={(queue: QueueStats) => {
+            return <span>{typeof queue.tasks_now?.longest_task_waiting_from === 'string' ? getDuration(queue.tasks_now?.longest_task_waiting_from) : 'N/A'}</span>
+          }} />
+        <ColumnDefinition
+          key="sla-today-column"
+          header="SLA Today"
+          content={(queue: QueueStats) => {
+            return <span>{typeof queue.tasks_today?.sla_percentage === 'number' && queue.tasks_today?.sla_percentage >= 0 ? `${Math.round(queue.tasks_today?.sla_percentage * 100)}%` : 'N/A'}</span>
+          }} />
+        <ColumnDefinition
+          key="handled-today-column"
+          header="Handled Today"
+          content={(queue: QueueStats) => {
+            return <span>{queue.tasks_today?.handled_tasks_count}</span>
+          }} />
+        <ColumnDefinition
+          key="abandoned-today-column"
+          header="Abandoned Today"
+          content={(queue: QueueStats) => {
+            return <span>{queue.tasks_today?.abandoned_tasks_count}</span>
+          }} />
+        <ColumnDefinition
+          key="agents-available-column"
+          header="Agents Available"
+          content={(queue: QueueStats) => {
+            return <span>{queue.workers?.total_available_workers}</span>
+          }} />
+        <ColumnDefinition
+          key="total-agents-column"
+          header="Total Agents"
+          content={(queue: QueueStats) => {
+            return <span>{queue.workers?.total_eligible_workers}</span>
+          }} />
+      </DataTable>
     </div>
   )
 }

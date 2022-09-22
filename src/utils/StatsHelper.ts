@@ -180,16 +180,16 @@ export class StatsHelper {
   updateStatsItem(newItem: any, stats: QueueStats): QueueStats {
     switch (newItem.key) {
       case 'tasks_now':
-        stats.tasks_now = (newItem.value as QueueTasksNowMap)["queue"];
+        stats.tasks_now = (newItem.data as QueueTasksNowMap)["queue"];
         break;
       case 'tasks_thirty_minutes':
-        stats.tasks_thirty_minutes = (newItem.value as QueueTasksHistoricalMap)["queue"];
+        stats.tasks_thirty_minutes = (newItem.data as QueueTasksHistoricalMap)["queue"];
         break;
       case 'tasks_today':
-        stats.tasks_today = (newItem.value as QueueTasksHistoricalMap)["queue"];
+        stats.tasks_today = (newItem.data as QueueTasksHistoricalMap)["queue"];
         break;
       case 'worker_activities_statistics':
-        stats.workers = newItem.value as QueueWorkerActivities;
+        stats.workers = newItem.data as QueueWorkerActivities;
         break;
       default:
     }
