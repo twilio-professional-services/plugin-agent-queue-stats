@@ -2,6 +2,8 @@
 
 In Flex, workers with only the agent role cannot access the Queue Stats view. Hacking the Queue Stats view in results in failed API calls and an error page, so an alternative approach is needed. This plugin adds a new view to the side nav for workers with the agent role, "Agent Queue Stats."
 
+**For the Flex UI 2.x version of this plugin, see [the flex-ui-v2 branch](https://github.com/twilio-professional-services/plugin-agent-queue-stats/tree/flex-ui-v2).**
+
 ![Agent teams complex view demo](resources/stats.gif)
 
 While this example is displaying only a few statistics in the data table, additional data is being stored into Redux for you to use, including half-hour stats and worker activity breakdown by queue. See the data model section below for a full listing of available data.
@@ -33,7 +35,7 @@ twilio plugins:install @twilio-labs/plugin-flex
 First, clone the repository and change to its directory:
 
 ```bash
-git clone https://github.com/dremin/plugin-agent-queue-stats.git
+git clone https://github.com/twilio-professional-services/plugin-agent-queue-stats.git
 
 cd plugin-agent-queue-stats
 ```
