@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import { StatsTableCell, StatsKeyTableCell } from './AgentQueueStatsStyles';
+import { AgentQueueStatsWrapper, StatsTableCell, StatsKeyTableCell } from './AgentQueueStatsStyles';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
@@ -49,7 +49,7 @@ const AgentQueueStatsComponent = (props: ContainerProps) => {
   }
   
   return (
-    <div>
+    <AgentQueueStatsWrapper>
       <Table>
         <TableHead>
           <TableRow>
@@ -82,7 +82,7 @@ const AgentQueueStatsComponent = (props: ContainerProps) => {
           }
         </TableBody>
       </Table>
-    </div>
+    </AgentQueueStatsWrapper>
   )
 }
 
