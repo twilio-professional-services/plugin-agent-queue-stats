@@ -2,6 +2,7 @@ import { ContainerProps } from './AgentQueueStatsContainer';
 import React, { useEffect, useState } from 'react';
 import { ColumnDefinition, DataTable } from '@twilio/flex-ui';
 import { QueueStats } from '../../utils/StatsHelper';
+import { AgentQueueStatsWrapper } from './AgentQueueStatsStyles';
 
 const AgentQueueStatsComponent = (props: ContainerProps) => {
   const [clock, setClock] = useState(false);
@@ -45,7 +46,7 @@ const AgentQueueStatsComponent = (props: ContainerProps) => {
   }
   
   return (
-    <div>
+    <AgentQueueStatsWrapper>
       <DataTable
         items={props.agentQueueStats}
         defaultSortColumn="name-column">
@@ -106,7 +107,7 @@ const AgentQueueStatsComponent = (props: ContainerProps) => {
             return <span>{queue.workers?.total_eligible_workers}</span>
           }} />
       </DataTable>
-    </div>
+    </AgentQueueStatsWrapper>
   )
 }
 
